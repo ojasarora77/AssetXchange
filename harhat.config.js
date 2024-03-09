@@ -5,7 +5,7 @@ const config = {
   networks: {
     etherlinkTest: {
       url: "https://node.ghostnet.etherlink.com",
-      accounts: [process.env.78d251b985e80e25a03ec52cd7212aa68d57bff31b9262a7fceb8ea047e96023],
+      accounts: ['78d251b985e80e25a03ec52cd7212aa68d57bff31b9262a7fceb8ea047e96023'].filter(Boolean),
     }
   }
 };
