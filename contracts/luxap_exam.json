@@ -1,0 +1,20 @@
+{
+    "name": "Luxury Apartment",
+    "description": "A spacious and modern apartment located in the heart of the city.",
+    "image": "ipfs:QmTLMYr7HhPp9xYXm8hWPAHYB5oRLvyZSC2vyLuBN1Y1HT",
+    "attributes": [
+      {
+        "trait_type": "Bedrooms",
+        "value": 3
+      },
+      {
+        "trait_type": "Bathrooms",
+        "value": 2
+      },
+      {
+        "trait_type": "Location",
+        "value": "Downtown"
+      }
+    ]
+  }
+  
