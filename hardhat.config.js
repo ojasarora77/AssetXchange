@@ -6,7 +6,7 @@ module.exports = {
   networks: {
     etherlinkTest: {
       url: "https://node.ghostnet.etherlink.com",
-      accounts: [process.env.YOUR_PRIVATE_KEY],
+      accounts: process.env.YOUR_PRIVATE_KEY,
     },
   },
 };
