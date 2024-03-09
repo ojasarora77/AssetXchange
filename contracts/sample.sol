@@ -8,20 +8,15 @@ contract MyToken is ERC1155, AccessControl {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     mapping(uint256 => string) private tokenURIs;
 
-    constructor() ERC1155("") {
+    constructor() ERC1155("https://ipfs.io/ipfs/QmPjyATk9s5BsZMUD82eWYCEWGmuCXAQjarBirGMrH4eE5?filename=luxap_exam.json") {
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _setupRole(MINTER_ROLE, msg.sender);
+        // Optionally mint initial tokens here if needed
     }
 
     function mint(address account, uint256 id, uint256 amount, bytes memory data) public {
         require(hasRole(MINTER_ROLE, msg.sender), "MyToken: must have minter role to mint");
         _mint(account, id, amount, data);
-    }
-
-    function mintRealEstate(address account, uint256 id, string memory uri, bytes memory data) public {
-        require(hasRole(MINTER_ROLE, msg.sender), "MyToken: must have minter role to mint");
-        setTokenURI(id, uri); // Set URI for this token
-        _mint(account, id, 1, data); // Mint exactly one unit to signify an NFT
     }
 
     function burn(address account, uint256 id, uint256 amount) public {
@@ -37,5 +32,11 @@ contract MyToken is ERC1155, AccessControl {
     function uri(uint256 tokenId) public view override returns (string memory) {
         require(bytes(tokenURIs[tokenId]).length > 0, "MyToken: URI not set");
         return tokenURIs[tokenId];
+    }
+
+    function mintRealEstate(address account, uint256 id, string memory tokenURI, bytes memory data) public {
+        require(hasRole(MINTER_ROLE, msg.sender), "MyToken: must have minter role to mint");
+        setTokenURI(id, tokenURI); // Associate the token ID with its IPFS URI
+        _mint(account, id, 1, data); // Mint exactly one unit to signify an NFT
     }
 }
