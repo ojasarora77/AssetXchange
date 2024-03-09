@@ -1,21 +1,23 @@
 const { ethers } = require("hardhat");
-
-async function main() {
-  // Retrieve the compiled contract using the contract's name.
-  const MyToken = await ethers.getContractFactory("MyToken");
-
-  // Deploy the contract.
-  const myToken = await MyToken.deploy("https://my.api.com/{id}.json"); // Replace with your metadata URI
-
-  // Wait for the contract to be deployed.
-  await myToken.deployed();
-
-  console.log(`MyToken deployed to: ${myToken.address}`);
+async function callMyContract() {
+  const MyContract = await ethers.getContractFactory("Counter");
+  const contract = MyContract.attach(
+    // The deployed contract address
+    "0xD4D502bF38Fb667d06B184434295c9f66d486838"
+  );
+  const store = await contract.store(201);
+  console.log("Original Value:", 201);
+  await contract.increment();
+  let finalResult = await contract.getter();
+  console.log("Increment Result:", finalResult);
+  await contract.increment();
+  finalResult = await contract.getter();
+  console.log("Increment Result:", finalResult);
+  await contract.decrement();
+  finalResult = await contract.getter();
+  console.log("Decrement Result:", finalResult);
 }
-
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
+callMyContract().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
