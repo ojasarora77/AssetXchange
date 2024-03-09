@@ -9,9 +9,9 @@ contract MyToken is ERC1155, AccessControl {
     mapping(uint256 => string) private tokenURIs;
 
     constructor() ERC1155("https://ipfs.io/ipfs/QmPjyATk9s5BsZMUD82eWYCEWGmuCXAQjarBirGMrH4eE5?filename=luxap_exam.json") {
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _setupRole(MINTER_ROLE, msg.sender);
-        // Optionally mint initial tokens here if needed
+       _grantRole(DEFAULT_ADMIN_ROLE, msg.sender); 
+        _grantRole(MINTER_ROLE, msg.sender);
+        
     }
 
     function mint(address account, uint256 id, uint256 amount, bytes memory data) public {
@@ -38,5 +38,8 @@ contract MyToken is ERC1155, AccessControl {
         require(hasRole(MINTER_ROLE, msg.sender), "MyToken: must have minter role to mint");
         setTokenURI(id, tokenURI); // Associate the token ID with its IPFS URI
         _mint(account, id, 1, data); // Mint exactly one unit to signify an NFT
+    }
+    function supportsInterface(bytes4 interfaceId) public view override(ERC1155, AccessControl) returns (bool) {
+        return super.supportsInterface(interfaceId);
     }
 }
