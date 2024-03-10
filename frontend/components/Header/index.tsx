@@ -57,7 +57,33 @@ const Header = () => {
   const handleConnect = async () => {  
     let accounts = await window.ethereum?.request({  method: "eth_requestAccounts" })  
     updateWallet(accounts)   
-    console.log(window.ethereum?.chainId)
+    if (window.ethereum?.chainId != "0x1f47b"){
+      try {
+        await window.ethereum?.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0x1f47b' }],
+        });
+      } catch (switchError) {
+        // This error code indicates that the chain has not been added to MetaMask.
+        if (switchError.code === 4902) {
+          try {
+            await window.ethereum?.request({
+              method: 'wallet_addEthereumChain',
+              params: [
+                {
+                  chainId: '0x1f47b',
+                  chainName: '...',
+                  rpcUrls: ['https://...'] /* ... */,
+                },
+              ],
+            });
+          } catch (addError) {
+            // handle "add" error
+          }
+        }
+        // handle other "switch" errors
+      }
+    }
     
   }
   

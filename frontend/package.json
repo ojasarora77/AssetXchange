@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@metamask/detect-provider": "^2.0.0",
     "@metamask/sdk-react": "^0.16.0",
     "@types/bcrypt": "^5.0.1",
     "@types/node": "^20.8.9",
