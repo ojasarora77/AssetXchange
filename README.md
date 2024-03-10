@@ -1,5 +1,6 @@
 # AssetXchange
-![image](https://github.com/ojasarora77/AssetXchange/assets/149180655/997dcee0-d302-47e9-878c-55e932dd54e5) 
+![image](https://github.com/ojasarora77/AssetXchange/assets/149180655/4ce181a3-e56b-4500-9c0f-417aac9f4a04)
+
 
 ### Project Description:
 #### AssestXchange aims to simplify Asset management. AssetXchange enables users to tokenize their real-world assets easily through a non-technical Dapp </br> Rather than being limited to one type of asset for one sector, AssetXchange enables the creation of “Asset Types”​ </br> Businesses can then create “Asset Types” which represent a type of product or asset. “Assets” can then be created based on one of their asset types which represents a physical asset.​ <br/>These assets can be created and transferred to customers at the point of sale, or used internally for resource management​
