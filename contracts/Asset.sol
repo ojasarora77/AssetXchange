@@ -9,16 +9,18 @@ contract Asset is ERC721 {
     mapping (uint256 => string[]) assetData;
     mapping (uint256 => string) assetURI;
 
-
+    event created(address asset);
     uint256 private tokenIdNo;
 
     uint256 private assetTypeToken;
     AssetType private assetType;
 
-    constructor(uint256 token, address _assetTypeAddress) ERC721("AssetXchange Asset", "AXCA") {
+    constructor(uint256 token, address _assetTypeAddress, string memory assetName, string memory assetTicker) ERC721(assetName, assetTicker) {
         tokenIdNo = 0;
         assetTypeToken = token;
         assetType = AssetType(_assetTypeAddress);
+        _mint(assetType.ownerOf(assetTypeToken), 0);
+        emit created(address(this));
     }
 
     function createAsset(address account, string[] memory assetProperties, string memory URI) external returns (uint256) {

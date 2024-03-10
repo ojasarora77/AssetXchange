@@ -16,16 +16,16 @@ contract AssetType is ERC721 {
     }
 
     // Create a new type of asset
-    function createAssetType(address account, string[] memory assetPropertyNames, string memory URI) external returns(uint256){
+    function createAssetType(address account, string[] memory assetPropertyNames, string memory URI, string memory name, string memory ticker) external returns(Asset){
         tokenIdNo += 1;
         _mint(account, tokenIdNo);
 
         assetTypeData[tokenIdNo] = assetPropertyNames;
         assetTypeURI[tokenIdNo] = URI;
 
-        Asset a = new Asset(tokenIdNo, address(this));
+        Asset a = new Asset(tokenIdNo, address(this), name, ticker);
         emit AssetCreated(address(a));
-        return tokenIdNo;
+        return a;
     }
 
     function checkAssetTypeOwner(address sender, uint256 assetType) public view returns(bool){
@@ -35,11 +35,6 @@ contract AssetType is ERC721 {
     // Getter function for assetTypeData
     function getAssetTypeData(uint256 tokenId) public view returns (string[] memory) {
         return assetTypeData[tokenId];
-    }
-
-    // Getter function for assetTypeURI
-    function getAssetTypeURI(uint256 tokenId) public view returns (string memory) {
-        return assetTypeURI[tokenId];
     }
 
     function tokenURI(uint256 token) public override  view returns(string memory){
